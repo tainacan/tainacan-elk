@@ -24,7 +24,7 @@ docker-composer up -d
 
 #### finalizar os serviços:
 ```
-docker-composer down -d
+docker-composer down
 ```
 
 #### finalizar apenas um serviço:
