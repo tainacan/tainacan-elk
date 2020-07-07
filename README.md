@@ -1,4 +1,4 @@
-# elastic_stack_integration
+# Tainacan Elastic Stack Integration
 ## requisitos:
 [docker](https://docs.docker.com/get-docker)
 
@@ -40,3 +40,7 @@ docker-composer start filebeat
 docker-composer start logstash
 docker-composer start elasticsearch
 ```
+#### Arquivos de configuração da integração:
+
+1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
+2. config/logstash/pipeline/ -> configuração do pipeline do logstash
