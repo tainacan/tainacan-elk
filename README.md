@@ -44,3 +44,11 @@ docker-compose start elasticsearch
 
 1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
 2. config/logstash/pipeline/ -> configuração do pipeline do logstash
+
+#### Verificar elasticsearch:
+```
+http://localhost:9200/
+http://localhost:9200/_cat/indices
+http://localhost:9200/tainacan_integracao/_search
+```
+
