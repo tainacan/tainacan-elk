@@ -19,26 +19,26 @@
 ### principais comandos
 #### iniciar os serviços:
 ```
-docker-composer up -d
+docker-compose up -d
 ```
 
 #### finalizar os serviços:
 ```
-docker-composer down
+docker-compose down
 ```
 
 #### finalizar apenas um serviço:
 ```
-docker-composer stop filebeat
-docker-composer stop logstash
-docker-composer stop elasticsearch
+docker-compose stop filebeat
+docker-compose stop logstash
+docker-compose stop elasticsearch
 ```
 
 #### inicializar apenas um serviço:
 ```
-docker-composer start filebeat
-docker-composer start logstash
-docker-composer start elasticsearch
+docker-compose start filebeat
+docker-compose start logstash
+docker-compose start elasticsearch
 ```
 #### Arquivos de configuração da integração:
 
