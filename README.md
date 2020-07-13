@@ -52,7 +52,7 @@ http://localhost:9200/_cat/indices
 http://localhost:9200/tainacan_integracao/_search
 ```
 
-## Excluir index do elasticsearch
+#### Excluir index do elasticsearch
 ```
 curl -XDELETE http://localhost:9200/<nome do index>
 ```
