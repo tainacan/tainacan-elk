@@ -49,7 +49,7 @@ docker-compose start elasticsearch
 ```
 http://localhost:9200/
 http://localhost:9200/_cat/indices
-http://localhost:9200/tainacan_integracao/_search
+http://localhost:9200/<nome do index>/_search
 ```
 
 #### Excluir index do elasticsearch
