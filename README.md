@@ -54,15 +54,16 @@ http://localhost:9200/
 http://localhost:9200/_cat/indices
 http://localhost:9200/<nome do index>/_search
 ```
+#### Excluir index do elasticsearch
+```
+curl -XDELETE http://localhost:9200/<nome do index>
+```
 #### Acessar kibana:
 ```
 http://localhost:5601/
 ```
 
-#### Excluir index do elasticsearch
-```
-curl -XDELETE http://localhost:9200/<nome do index>
-```
+
 
 
 
