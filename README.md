@@ -43,11 +43,6 @@ docker-compose start filebeat
 docker-compose start logstash
 docker-compose start elasticsearch
 ```
-#### Arquivos de configuração da integração:
-
-1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
-2. config/logstash/pipeline/ -> configuração do pipeline do logstash
-
 #### Acessar elasticsearch:
 ```
 http://localhost:9200/
@@ -62,6 +57,12 @@ curl -XDELETE http://localhost:9200/<nome do index>
 ```
 http://localhost:5601/
 ```
+#### Arquivos de configuração da integração:
+
+1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
+2. config/logstash/pipeline/ -> configuração do pipeline do logstash
+
+
 
 
 
