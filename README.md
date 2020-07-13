@@ -14,7 +14,7 @@
 3. filebeat:
    serviço de coletor de dados das instalações
 4. kibana:
-   serviço de dashboard (atualizar arquivo docker-compose)
+   serviço de dashboard
 
 
 ### principais comandos
