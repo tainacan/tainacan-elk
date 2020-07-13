@@ -2,7 +2,7 @@
 ## requisitos:
 [docker](https://docs.docker.com/get-docker)
 
-[docker-composer](https://docs.docker.com/compose/install)
+[docker-compose](https://docs.docker.com/compose/install)
 ### descrição:
    o arquivo `docker-compose.yml` descreve os serviços que serão inicializados, nele descrevemos o serviço para 4 containers:
   
@@ -51,4 +51,11 @@ http://localhost:9200/
 http://localhost:9200/_cat/indices
 http://localhost:9200/tainacan_integracao/_search
 ```
+
+## Excluir index do elasticsearch
+```
+curl -XDELETE http://localhost:9200/<nome do index>
+```
+
+
 
