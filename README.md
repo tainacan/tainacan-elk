@@ -3,6 +3,7 @@
 [docker](https://docs.docker.com/get-docker)
 
 [docker-compose](https://docs.docker.com/compose/install)
+
 ### descrição:
    o arquivo `docker-compose.yml` descreve os serviços que serão inicializados, nele descrevemos o serviço para 4 containers:
   
@@ -13,7 +14,7 @@
 3. filebeat:
    serviço de coletor de dados das instalações
 4. kibana:
-   serviço de dashboard (não incluído ainda)
+   serviço de dashboard (atualizar arquivo docker-compose)
 
 
 ### principais comandos
@@ -29,6 +30,7 @@ docker-compose down
 
 #### finalizar apenas um serviço:
 ```
+docker-compose stop kibana
 docker-compose stop filebeat
 docker-compose stop logstash
 docker-compose stop elasticsearch
@@ -36,6 +38,7 @@ docker-compose stop elasticsearch
 
 #### inicializar apenas um serviço:
 ```
+docker-compose start kibana
 docker-compose start filebeat
 docker-compose start logstash
 docker-compose start elasticsearch
@@ -45,11 +48,15 @@ docker-compose start elasticsearch
 1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
 2. config/logstash/pipeline/ -> configuração do pipeline do logstash
 
-#### Verificar elasticsearch:
+#### Acessar elasticsearch:
 ```
 http://localhost:9200/
 http://localhost:9200/_cat/indices
 http://localhost:9200/<nome do index>/_search
+```
+#### Acessar kibana:
+```
+http://localhost:5601/
 ```
 
 #### Excluir index do elasticsearch
