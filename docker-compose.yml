@@ -13,7 +13,7 @@ services:
       - esdata_integracao:/usr/share/elasticsearch/data
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.7.1
+    image: docker.elastic.co/logstash/logstash:7.7.0
     ports:
       - 5000:5000
     environment:
@@ -27,13 +27,22 @@ services:
     user: root
     environment:
       - BEAT_STRICT_PERMS=false
-    #image: docker.elastic.co/beats/filebeat:7.6.0
-    image: docker.elastic.co/beats/filebeat:7.8.0
+    image: docker.elastic.co/beats/filebeat:7.7.0
     volumes:
       - ./config/beats/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./config/beats/filebeat/inputs.d:/usr/share/filebeat/inputs.d
       - fbdata:/usr/share/filebeat/data/
     restart: on-failure
+ 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.7.0
+    container_name: kibana
+    ports: 
+      - 5601:5601
+    #networks:
+     # - stack
+    depends_on: 
+      - elasticsearch
 
 volumes:
   esdata_integracao:
