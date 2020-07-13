@@ -1,0 +1,31 @@
+- type: httpjson
+  http_method: GET
+  interval: 3600s
+  #interval: 10s
+  url: http://mhn.acervos.museus.gov.br/wp-json/tainacan/v2/collection/24/items/?perpage=100&paged=1
+  json_objects_array: "items"
+
+  processors:
+  - decode_json_fields:
+      fields: [message]
+      target: json
+  - convert:
+      mode: "rename"
+      fields:
+        - {from: "json.title",                                        to: "payload.titulo"}
+        - {from: "json.description",                                  to: "payload.descricao"}
+        - {from: "json.collection_id",                                to: "payload.colecaoId"}
+        - {from: "json.metadata.classe-2.value_as_string",     to: "payload.classificacao"}
+        - {from: "json.metadata.material.value_as_string",  to: "payload.material"}
+        - {from: "json.metadata.numero-de-registro.value_as_string",to: "payload.numeroRegistro"}
+      ignore_missing: true
+      fail_on_error: false
+  - drop_fields:
+      fields: ["message", "json"]
+  - add_fields:
+      target: payload
+      fields:
+        instalacao: "museu mhn"
+
+#x-wp-total #total de itens
+    #x-wp-totalpages #total de pagina
