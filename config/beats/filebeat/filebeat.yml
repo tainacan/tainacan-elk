@@ -1,12 +1,12 @@
 filebeat.config.inputs:
   enabled: true
-  path: inputs.d/*.yml
+  path: inputs.d/rcteste_villa_lobos.yml
   reload.enabled: true
   reload.period: 5s
 
-#output.console:
-#   pretty: true
-output.logstash:
-  hosts: ["logstash:5000"]
+output.console:
+   pretty: true
+#output.logstash:
+#  hosts: ["logstash:5000"]
 #output.elasticsearch:
 #  hosts: ["elasticsearch:9200"]
