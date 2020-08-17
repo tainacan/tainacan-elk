@@ -16,18 +16,17 @@
 4. kibana:
    serviço de dashboard
 
+Todos na versão 7.6.0 para melhor funcionamento de uma das configurações.  
 
 ### principais comandos
 #### iniciar os serviços:
 ```
 docker-compose up -d
 ```
-
 #### finalizar os serviços:
 ```
 docker-compose down
 ```
-
 #### finalizar apenas um serviço:
 ```
 docker-compose stop kibana
@@ -35,7 +34,6 @@ docker-compose stop filebeat
 docker-compose stop logstash
 docker-compose stop elasticsearch
 ```
-
 #### inicializar apenas um serviço:
 ```
 docker-compose start kibana
@@ -58,10 +56,10 @@ curl -XDELETE http://localhost:9200/<nome do index>
 http://localhost:5601/
 ```
 #### Arquivos de configuração da integração:
-
+```
 1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
 2. config/logstash/pipeline/ -> configuração do pipeline do logstash
-
+```
 
 
 
