@@ -14,9 +14,7 @@
 3. filebeat:
    serviço de coletor de dados das instalações
 4. kibana:
-   serviço de dashboard
-
-Todos na versão 7.6.0 para melhor funcionamento de uma das configurações.  
+   serviço de dashboard  
 
 ### principais comandos
 #### iniciar os serviços:
