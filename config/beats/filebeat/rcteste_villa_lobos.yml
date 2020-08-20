@@ -1,0 +1,43 @@
+- type: httpjson
+  http_method: GET
+  interval: 3600s
+  url: https://rcteste.tainacan.org/wp-json/tainacan/v2/collection/21399/items/?perpage=1&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram
+  json_objects_array: "items"
+  pagination:
+    enabled: true
+    extra_body_content:
+      perpage: 50
+    id_field: pagination.next_page
+    req_field: paged
+    url: https://rcteste.tainacan.org/wp-json/tainacan/v2/collection/21399/items/?perpage=1&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram
+  
+  processors:
+  - decode_json_fields:
+      fields: [message]
+      target: json
+  - convert:
+      mode: "rename"
+      fields:
+        - {from: "json.id",                                to: "payload.id"}
+        - {from: "json.data.resumo-descritivo.value",      to: "payload.resumo-descritivo"}
+        - {from: "json.data.titulo.value",                 to: "payload.titulo"}
+        - {from: "json.data.numero-registro.value",        to: "payload.numero-registro"}
+        - {from: "json.data.outros-numeros.value",         to: "payload.outros-numeros"}
+        - {from: "json.data.situacao.value",               to: "payload.situacao"}
+        - {from: "json.data.denominacao.value",            to: "payload.denominacao"}
+        - {from: "json.data.autor.value",                  to: "payload.autor"}
+        - {from: "json.data.classificacao.value",          to: "payload.classificacao"}
+        - {from: "json.data.dimensoes.value",              to: "payload.dimensoes"}
+        - {from: "json.data.material-tecnica.value",       to: "payload.material-tecnica"}
+        - {from: "json.data.data-producao.value",          to: "payload.data-producao"}
+        - {from: "json.data.local-producao.value",         to: "payload.local-producao"}
+        - {from: "json.data.estado-conservacao.value",     to: "payload.estado-conservacao"}
+        - {from: "json.data.condicoes-reproducao.value",   to: "payload.condicoes-reproducao"}
+      ignore_missing: true
+      fail_on_error: false
+  - drop_fields:
+      fields: ["message", "json"]
+  - add_fields:
+      target: payload
+      fields:
+        instalacao: "VillaLobos"
