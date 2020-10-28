@@ -19,9 +19,16 @@ services:
     ports:
       - 5000:5000
     environment:
-       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+       LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+       LS_OPTS: "--config.reload.automatic --config.reload.interval 5s"
     volumes:
       - ./config/logstash/pipeline:/usr/share/logstash/pipeline
+      - ./config/logstash/scripts:/scripts
+      - type: volume
+        source: share_logstash
+        target: /usr/share/logstash
+        volume:
+          nocopy: false
 
   filebeat:
     container_name: filebeat_integracao
@@ -48,6 +55,12 @@ volumes:
   esdata_integracao:
   fbdata:
   logstashdata:
+  share_logstash:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/vinicius/Development/tainacan/tainacan-elk/share_logstash
+      o: bind
 
 #https://datastudio.google.com/reporting/469f706e-1574-4826-8fc3-39fd932a4255?s=rKoNxRs9FIw
 #sudo docker network connect dev_default filebeat_integracao

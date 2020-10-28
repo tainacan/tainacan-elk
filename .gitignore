@@ -1,0 +1,4 @@
+share_logstash
+./share_logstash
+./share_logstash/*
+share_logstash/*

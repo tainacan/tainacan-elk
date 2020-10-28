@@ -1,6 +1,6 @@
 filebeat.config.inputs:
   enabled: true
-  path: inputs.d/rcteste_villa_lobos.yml
+  path: inputs.d/*.yml
   reload.enabled: true
   reload.period: 5s
 
