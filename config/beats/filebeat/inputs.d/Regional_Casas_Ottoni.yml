@@ -1,15 +1,15 @@
 - type: httpjson
   http_method: GET
   interval: 3600s
-  url: http://museuregionalcasadosottoni.acervos.museus.gov.br/wp-json/tainacan/v2/collection/31492/items/?perpage=96&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
+  url: http://museuregionalcasadosottoni.acervos.museus.gov.br/wp-json/tainacan/v2/collection/31492/items/?perpage=50&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
   json_objects_array: "items"
   pagination:
     enabled: true
     extra_body_content:
-      perpage: 96
+      perpage: 1
     id_field: pagination.next_page
     req_field: paged
-    url: http://museuregionalcasadosottoni.acervos.museus.gov.br/wp-json/tainacan/v2/collection/31492/items/?perpage=96&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
+    url: http://museuregionalcasadosottoni.acervos.museus.gov.br/wp-json/tainacan/v2/collection/31492/items/?perpage=50&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
   
   processors:
   - decode_json_fields:
