@@ -59,7 +59,21 @@ http://localhost:5601/
 2. config/logstash/pipeline/ -> configuração do pipeline do logstash
 ```
 
+#### Configurar usuários e senhas - xpack
+```
+docker-compose exec elasticsearch bash
+./bin/elasticsearch-setup-passwords interactives
+ctrl+d
 
+docker-compose exec kibana bash
+./bin/kibana-keystore create
+./bin/kibana-keystore add elasticsearch.username
+./bin/kibana-keystore add elasticsearch.password
+ctrl+d
+
+docker-compose stop kibana
+docker-compose start kibana
+```
 
 
 
