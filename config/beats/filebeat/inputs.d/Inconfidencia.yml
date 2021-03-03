@@ -6,7 +6,7 @@
   pagination:
     enabled: true
     extra_body_content:
-      perpage: 1
+      perpage: 50
     id_field: pagination.next_page
     req_field: paged
     url: http://museudainconfidencia.acervos.museus.gov.br/wp-json/tainacan/v2/collection/9/items/?perpage=50&order=DESC&orderby=date&status=publish&exposer=json-flat&mapper=inbcm-ibram&paged=1
