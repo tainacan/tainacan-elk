@@ -14,7 +14,11 @@
 3. filebeat:
    serviço de coletor de dados das instalações
 4. kibana:
-   serviço de dashboard  
+   serviço de dashboard
+5. tainacan:
+   instância do wordpress/tainacan
+6. db:
+   instância do banco de dados do mysql para o wordpress
 
 ### principais comandos
 #### iniciar os serviços:
@@ -53,16 +57,30 @@ curl -XDELETE http://localhost:9200/<nome do index>
 ```
 http://localhost:5601/
 ```
-#### Arquivos de configuração da integração:
+### Arquivos de configuração da integração:
+#### filebeat:
 ```
-1. config/beats/filebeat/inputs.d/  -> arquivos configurações dos coletores
-2. config/logstash/pipeline/ -> configuração do pipeline do logstash
+1. filebeat/filebeat.yml -> configuração geral para o filebeat
+1. filebeat/inputs.d/*  -> arquivos configurações dos coletores
+```
+
+#### logstash:
+```
+1. logstash -> diretório com os arquivos do logstash
+2. logstash/pipeline/ -> configuração do pipeline do logstash
+```
+
+#### outros:
+```
+1. esdata -> diretório para persistencia do banco do elasticsearch
+2. dbdata -> diretório para persistência do banco de dados do mysql
+3. tainacan -> diretório para perisitência da instalação wordpress/tainacan
 ```
 
 #### Configurar usuários e senhas - xpack
 ```
 docker-compose exec elasticsearch bash
-./bin/elasticsearch-setup-passwords interactives
+./bin/elasticsearch-setup-passwords interactive
 ctrl+d
 
 docker-compose exec kibana bash
@@ -74,6 +92,20 @@ ctrl+d
 docker-compose stop kibana
 docker-compose start kibana
 ```
+
+O usuário e senha de ingestão de dados deve ser configurada para o pipeline do logstash:
+```
+output {
+   elasticsearch {
+     hosts => "elasticsearch"
+     document_id => "%{fingerprint}"
+     index => "tainacan_integracao"
+     user => "log_stash_user"
+    password => "pass123456"
+   }
+}
+```
+
 
 
 

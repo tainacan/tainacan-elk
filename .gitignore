@@ -1,4 +1,7 @@
-share_logstash
-./share_logstash
-./share_logstash/*
-share_logstash/*
+dbdata
+esdata
+tainacan
+trashed
+filebeat/fbdata
+logstash/data
+logstash/logstash
