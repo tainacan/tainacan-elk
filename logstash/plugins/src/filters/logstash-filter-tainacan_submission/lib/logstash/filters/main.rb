@@ -18,10 +18,10 @@ main = Main.new()
 x = Thread.new {
     puts "iniciando task 1"
     
-    url = "url 1"
-    collection_id = "collection_id 1"
-    metadata = "metadata 1"
-    item = {"title"=>"hello", "description"=>'cumprimento em inglês'}
+    url = "http://rcteste.tainacan.org/"
+    collection_id = "10100"
+    metadata = {10105 => "name", 10103 => "description"}
+    item = {"name"=>"hello", "description"=>'cumprimento em inglês'}
     
     task = main.dispatch_task(url, collection_id, metadata, item)
     puts "finalizando task 1: #{task}"
@@ -31,10 +31,10 @@ x = Thread.new {
 y = Thread.new {
     puts "iniciando task 2"
     
-    url = "url 2"
-    collection_id = "collection_id 2"
-    metadata = "metadata 2"
-    item = {"title"=>"Hola", "description"=>'cumprimento em espanhol'}
+    url = "http://rcteste.tainacan.org/"
+    collection_id = "10100"
+    metadata = {10105 => "name", 10103 => "description"}
+    item = {"name"=>"Hola", "description"=>'cumprimento em espanhol'}
     
     task = main.dispatch_task(url, collection_id, metadata, item)
     puts "finalizando task 2: #{task}"
@@ -43,10 +43,10 @@ y = Thread.new {
 z = Thread.new {
     puts "iniciando task 3"
     
-    url = "url 3"
-    collection_id = "collection_id 3"
-    metadata = "metadata 3"
-    item = {"title"=>"Salut", "description"=>'cumprimento em francês'}
+    url = "http://rcteste.tainacan.org/"
+    collection_id = "10100"
+    metadata = {10105 => "name", 10103 => "description"}
+    item = {"name"=>"Salut", "description"=>'cumprimento em francês'}
 
     task = main.dispatch_task(url, collection_id, metadata, item)
     puts "finalizando task 3: #{task}"
