@@ -90,7 +90,7 @@ services:
       - elasticsearch
 
 volumes:
-  logstashdata:
+  share_logstash:
     driver: local
     driver_opts:
       type: none
