@@ -3,7 +3,7 @@ require_relative "Submission"
 class SubmissionQueue
     def initialize
         @queue = Queue.new
-        @pool_size = 4
+        @pool_size = 1
         self.create_poll
     end
 
