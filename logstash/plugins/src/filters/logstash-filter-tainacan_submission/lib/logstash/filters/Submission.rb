@@ -51,10 +51,13 @@ class Submission < PollProcess
                   response_obj = JSON.parse(response.body)
                   @id = response_obj['id']
                   return response_obj
-                end
+                end 
             else 
               response_obj = JSON.parse(response.body)
-              $log.error "Requisição errada #{response_obj}"
+              $log.error "#{response_obj['error_message']}#{response_obj}"
+              response_obj['id'] = false
+              @id = false
+              return response_obj
             end
           end
         end
