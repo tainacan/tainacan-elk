@@ -55,7 +55,6 @@ class Submission < PollProcess
             else 
               response_obj = JSON.parse(response.body)
               $log.error "#{response_obj['error_message']}#{response_obj}"
-              response_obj['id'] = false
               @id = false
               return response_obj
             end
