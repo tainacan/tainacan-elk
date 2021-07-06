@@ -40,7 +40,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 6144M
+          memory: 2144M
     volumes:
       - ./esdata:/usr/share/elasticsearch/data
 

@@ -5,3 +5,5 @@ trashed
 filebeat/fbdata
 logstash/data
 logstash/logstash
+writeLog.log
+logstash/plugins/src/filters/logstash-filter-tainacan_submission/lib/logstash/filters/writeLog.log
