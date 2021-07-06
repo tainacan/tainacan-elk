@@ -25,10 +25,17 @@ class Submission < PollProcess
           if @metadata
             metadata_values = []
             @metadata.each do |id, field|
-              item_metadata = {
-                metadatum_id: id,
-                value: item[field] #logstash
-              }
+              if(field == 'classificacao')
+                item_metadata = {
+                  metadatum_id: id,
+                  value: item[field][-1] #logstash
+                }
+              else
+                item_metadata = {
+                  metadatum_id: id,
+                  value: item[field] #logstash
+                }
+              end
               metadata_values.push(item_metadata)
             end
             body = {
