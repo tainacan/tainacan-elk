@@ -26,7 +26,6 @@ class LogStash::Filters::TainacanSubmission < LogStash::Filters::Base
       metadata = @metadata
       item = event.to_hash()
       collection_id = @collection_id
-      event.set("classificao", event.get("classificacao")[-1])#recebe o ultimo indice do vetor 
       submission = @submission_queue.add_submission(url, collection_id, metadata, item)
       event.set("id_agretation", submission.get_id)
       puts "submission ID response: #{submission.get_id}"
