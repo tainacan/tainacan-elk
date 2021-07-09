@@ -53,6 +53,15 @@ http://localhost:9200/<nome do index>/_search
 ```
 curl -XDELETE http://localhost:9200/<nome do index>
 ```
+#### Excluir todos os itens do index do elasticsearch
+```
+POST <nome do index>/_delete_by_query?conflicts=proceed
+{
+ "query": {
+ "match_all": {}
+ }
+
+```
 #### Acessar kibana:
 ```
 http://localhost:5601/
