@@ -63,6 +63,7 @@ class Submission < PollProcess
               response_obj = JSON.parse(response.body)
               $log.error "#{response_obj['error_message']}#{response_obj}"
               @id = false
+              @error = response_obj['error_message']
               return response_obj
             end
           end
@@ -88,5 +89,9 @@ class Submission < PollProcess
 
     def get_id
         @id 
+    end
+
+    def get_error
+      @error
     end
 end

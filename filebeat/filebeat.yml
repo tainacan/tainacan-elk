@@ -1,10 +1,10 @@
 filebeat.config.inputs:
   enabled: true
-  path: inputs.d/*.yml
+  path: inputs.d/Ouro.yml
   reload.enabled: true
   reload.period: 5s
 
-#output.console:
-#  pretty: true
+# output.console:
+#   pretty: true
 output.logstash:
   hosts: ["logstash:5000"]
