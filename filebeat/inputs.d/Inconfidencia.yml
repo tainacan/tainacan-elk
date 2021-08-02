@@ -48,5 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu da Inconfidência"
-        local: "Minas Gerais"
+        museu: "Museu da Inconfidência"
+        colecao: "Acervo Museológico"
+        cidade: "Ouro Preto"
+        uf: "MG"

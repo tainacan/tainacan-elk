@@ -48,5 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu do Ouro"
-        local: "Minas Gerais"
+        museu: "Museu do Ouro"
+        colecao: "Acervo Museológico"
+        cidade: "Sabará"
+        uf: "MG"

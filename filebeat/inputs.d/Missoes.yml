@@ -47,5 +47,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu das Missões"
-        local: "Rio Grande do Sul"
+        museu: "Museu das Missões"
+        colecao: "Acervo Museológico"
+        cidade: "São Miguel das Missões"
+        uf: "RS"

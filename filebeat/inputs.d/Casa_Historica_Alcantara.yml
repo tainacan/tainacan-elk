@@ -48,5 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu Casa Histórica de Alcântara"
-        local: "Maranhão"
+        museu: "Museu Casa Histórica de Alcântara"
+        colecao: "Acervo Museológico"
+        cidade: "Alcântara"
+        uf: "MA"

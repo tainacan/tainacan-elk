@@ -47,5 +47,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu das Bandeiras"
-        local: "Goiás"
+        museu: "Museu das Bandeiras"
+        colecao: "Museu das Bandeiras"
+        cidade: "Cidade de Goiás"
+        uf: "GO"

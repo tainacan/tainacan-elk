@@ -47,5 +47,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu Villa Lobos"
-        local: "Rio de Janeiro"
+        museu: "Museu Villa Lobos"
+        colecao: "Fotografias"
+        cidade: "Rio de Janeiro"
+        uf: "RJ"

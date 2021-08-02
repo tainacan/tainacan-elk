@@ -96,5 +96,7 @@
     - add_fields:
         target: payload
         fields:
-          instalacao: "Museu da Abolição"
-          local: "Pernambuco"
+          museu: "Museu da Abolição"
+          colecao: "Acervo Museológico"
+          cidade: "Recife"
+          uf: "PE"

@@ -48,5 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu de Arte Sacra da Boa Morte"
-        local: "Goiás"
+        museu: "Museu de Arte Sacra da Boa Morte"
+        colecao: "Museu de Arte Sacra da Boa Morte"
+        cidade: "Cidade de Goiás"
+        uf: "GO"

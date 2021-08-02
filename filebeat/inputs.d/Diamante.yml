@@ -48,5 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu do Diamante"
-        local: "Minas Gerais"
+        museu: "Museu do Diamante"
+        colecao: "Acervo Museológico"
+        cidade: "Diamantina"
+        uf: "MG"

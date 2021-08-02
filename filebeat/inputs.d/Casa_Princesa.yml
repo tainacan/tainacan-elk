@@ -47,5 +47,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu Casa da Princesa"
-        local: "Goiás"
+        museu: "Museu Casa da Princesa"
+        colecao: "Museu Casa da Princesa"
+        cidade: "Pilar de Goiás"
+        uf: "GO"
