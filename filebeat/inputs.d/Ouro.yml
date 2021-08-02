@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu do Ouro"
+        local: "Minas Gerais"

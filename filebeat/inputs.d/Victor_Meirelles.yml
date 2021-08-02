@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu Victor Meirelles"
+        local: "Santa Catarina"

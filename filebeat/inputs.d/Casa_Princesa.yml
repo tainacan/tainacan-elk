@@ -48,3 +48,4 @@
       target: payload
       fields:
         instalacao: "Museu Casa da Princesa"
+        local: "Goiás"

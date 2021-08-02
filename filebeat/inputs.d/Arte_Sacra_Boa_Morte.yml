@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu de Arte Sacra da Boa Morte"
+        local: "Goiás"

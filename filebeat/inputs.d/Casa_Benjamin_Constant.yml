@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu Casa de Benjamin Constant"
+        local: "Rio de Janeiro"

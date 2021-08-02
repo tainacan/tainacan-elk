@@ -48,3 +48,4 @@
       target: payload
       fields:
         instalacao: "Museu Histórico Nacional"
+        local: "Rio de Janeiro"

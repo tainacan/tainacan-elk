@@ -48,3 +48,4 @@
       target: payload
       fields:
         instalacao: "Museu Regional São João Del Rey"
+        local: "Minas Gerais"

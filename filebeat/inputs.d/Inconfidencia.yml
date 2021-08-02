@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu da Inconfidência"
+        local: "Minas Gerais"

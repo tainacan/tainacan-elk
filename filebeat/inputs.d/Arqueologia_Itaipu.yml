@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu de Arqueologia de Itaipu"
+        local: "Rio de Janeiro"

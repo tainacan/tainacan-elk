@@ -49,3 +49,4 @@
       target: payload
       fields:
         instalacao: "Museu Casa da Hera"
+        local: "Rio de Janeiro"

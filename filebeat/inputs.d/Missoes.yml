@@ -48,3 +48,4 @@
       target: payload
       fields:
         instalacao: "Museu das Missões"
+        local: "Rio Grande do Sul"
