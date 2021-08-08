@@ -88,7 +88,7 @@ class Submission < PollProcess
     end
 
     def get_id
-        @id 
+        @id
     end
 
     def get_error

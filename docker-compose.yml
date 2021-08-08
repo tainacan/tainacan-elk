@@ -95,5 +95,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: C:\Users\Joyce\Desktop\tainacan-elk\logstash\logstash
+      device: [<LOCAL PATH>]/logstash/logstash
       o: bind
