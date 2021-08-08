@@ -28,7 +28,9 @@ class LogStash::Filters::TainacanSubmission < LogStash::Filters::Base
       collection_id = @collection_id
       submission = @submission_queue.add_submission(url, collection_id, metadata, item)
       event.set("id_agretation", submission.get_id)
+      event.set("error_description", submission.get_error)
       puts "submission ID response: #{submission.get_id}"
+      # puts "submission error: #{submission.get_error}"
     end
     filter_matched(event)
   end # def filter
