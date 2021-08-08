@@ -48,4 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu Casa da Hera"
+        museu: "Museu Casa da Hera"
+        colecao: "Indumentária"
+        cidade: "Vassouras"
+        uf: "RJ"

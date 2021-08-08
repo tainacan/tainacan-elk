@@ -48,4 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu Regional Casa dos Ottoni"
+        museu: "Museu Regional Casa dos Ottoni"
+        colecao: "Acervo Museológico"
+        cidade: "Serro"
+        uf: "MG"

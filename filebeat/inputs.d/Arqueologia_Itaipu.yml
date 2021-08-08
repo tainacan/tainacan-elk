@@ -48,4 +48,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu de Arqueologia de Itaipu"
+        museu: "Museu de Arqueologia de Itaipu"
+        colecao: "Acervo MAI"
+        cidade: "Niterói"
+        uf: "RJ"

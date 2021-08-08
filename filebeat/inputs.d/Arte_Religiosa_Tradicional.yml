@@ -1,7 +1,7 @@
 - type: httpjson
   http_method: GET
   interval: 3600s
-  url: http://museucasabenjaminconstant.acervos.museus.gov.br/wp-json/tainacan/v2/collection/5347/items/?perpage=50&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
+  url: https://museudeartereligiosaetradicional.acervos.museus.gov.br/wp-json/tainacan/v2/collection/878/items/?perpage=96&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
   json_objects_array: "items"
   pagination:
     enabled: true
@@ -9,7 +9,7 @@
       perpage: 50
     id_field: pagination.next_page
     req_field: paged
-    url: http://museucasabenjaminconstant.acervos.museus.gov.br/wp-json/tainacan/v2/collection/5347/items/?perpage=50&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
+    url: https://museudeartereligiosaetradicional.acervos.museus.gov.br/wp-json/tainacan/v2/collection/878/items/?perpage=96&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
 
   processors:
     - decode_json_fields:
@@ -96,7 +96,7 @@
     - add_fields:
         target: payload
         fields:
-          museu: "Museu Casa de Benjamin Constant"
-          colecao: "Acervo Museológico"
-          cidade: "Rio de Janeiro"
+          museu: "Museu de Arte Religiosa e Tradicional"
+          colecao: "Acervo museológico"
+          cidade: "Cabo Frio"
           uf: "RJ"

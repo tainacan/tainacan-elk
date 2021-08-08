@@ -47,4 +47,7 @@
   - add_fields:
       target: payload
       fields:
-        instalacao: "Museu Histórico Nacional"
+        museu: "Museu Histórico Nacional"
+        colecao: "Acervo Museológico"
+        cidade: "Rio de Janeiro"
+        uf: "RJ"
