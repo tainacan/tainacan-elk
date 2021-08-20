@@ -46,9 +46,11 @@ x = Thread.new {
         13=>"midias-relacionadas",
         39=>"instalacao",
         34=>"fingerprint",
-        35=>"url"
+        35=>"url",
+        '_thumbnail'=>"thumbnail-url"
     }
     item = {
+        "thumbnail-url" => "https://museudoouro.acervos.museus.gov.br/wp-content/uploads/2021/04/cropped-MO729-scaled-1.jpg",
         "denominacao"=>"Cadeira de Sola",
         "outros-numeros"=>"MO 61 | Tombo nº 1941.03.01",
         "titulo"=>"",
@@ -105,9 +107,11 @@ y = Thread.new {
         13=>"midias-relacionadas",
         39=>"instalacao",
         34=>"fingerprint",
-        35=>"url"
+        35=>"url",
+        '_thumbnail'=>"thumbnail-url"
     }
     item = {
+        "thumbnail-url"=>"https://museudoouro.acervos.museus.gov.br/wp-content/uploads/2019/04/MO-679-1.jpg",
         "denominacao"=>"Barra de ouro",
         "outros-numeros"=>"MO 1  |  Tombo nº 1942.21.01",
         "titulo"=>"",
