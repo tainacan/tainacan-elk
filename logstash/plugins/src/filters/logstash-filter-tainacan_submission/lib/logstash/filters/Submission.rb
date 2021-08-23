@@ -1,5 +1,6 @@
 require "uri"
 require 'open-uri'
+require 'mini_magick'
 require 'securerandom'
 require 'tmpdir'
 require "net/http"
@@ -20,9 +21,12 @@ class Submission < PollProcess
     def download_url_to(url, base_path)
       uri = URI(url)
       filename = uri.path.split("/").last
-      new_file = File.join(base_path, SecureRandom.uuid + '_' +filename )
-      response = uri.open
-      open(new_file, "wb") {|fp| fp.puts response.read }
+      new_file = File.join(base_path, SecureRandom.uuid + '_integracao_files_' + filename )
+
+      image = MiniMagick::Image.open(url)
+      image.resize "300x300"
+      image.write(new_file)
+
       return new_file
     end
     
