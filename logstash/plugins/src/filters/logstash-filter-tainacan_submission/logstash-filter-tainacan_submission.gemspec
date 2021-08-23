@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://www.elastic.co/guide/en/logstash/current/index.html"
   s.require_paths = ["lib"]
 
+
   # Files
   s.files = Dir['lib/**/*','spec/**/*','vendor/**/*','*.gemspec','*.md','CONTRIBUTORS','Gemfile','LICENSE','NOTICE.TXT']
    # Tests
@@ -19,5 +20,6 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency "logstash-core-plugin-api", "~> 2.0"
+  s.add_runtime_dependency 'mini_magick', '~> 4.10', '>= 4.10.0'
   s.add_development_dependency 'logstash-devutils'
 end
