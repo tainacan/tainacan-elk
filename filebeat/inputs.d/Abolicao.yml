@@ -89,6 +89,10 @@
               to: "payload.midias-relacionadas",
             }
           - { from: "json.url", to: "payload.url" }
+          - { 
+              from: "json.thumbnail",
+              to: "payload.thumbnail"
+            }
         ignore_missing: true
         fail_on_error: false
     - drop_fields:
