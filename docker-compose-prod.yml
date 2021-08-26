@@ -46,7 +46,10 @@ services:
 
   logstash:
     container_name: integracao_tnc_logstash
-    image: docker.elastic.co/logstash/logstash:7.9.0
+    # image: docker.elastic.co/logstash/logstash:7.9.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile/logstash
     environment:
        LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
     volumes:
