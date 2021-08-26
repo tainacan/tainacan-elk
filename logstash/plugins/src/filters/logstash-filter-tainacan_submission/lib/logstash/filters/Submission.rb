@@ -110,6 +110,8 @@ class Submission < PollProcess
         end
       rescue Exception => e
         $log.error "Houve um erro!: #{e}"
+        $log.error "metada received by logstash: #{@metadata}"
+        $log.error "item received by logstash: #{@item}"
         return
       end
     end
