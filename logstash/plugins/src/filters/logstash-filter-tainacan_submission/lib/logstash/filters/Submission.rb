@@ -23,7 +23,7 @@ class Submission < PollProcess
       filename = uri.path.split("/").last
       new_file = File.join(base_path, SecureRandom.uuid + '_integracao_files_' + filename )
 
-      image = MiniMagick::Image.open(url)
+      image = MiniMagick::Image.open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE)
       image.resize "300x300"
       image.write(new_file)
 
@@ -44,7 +44,8 @@ class Submission < PollProcess
             
           if @metadata
             metadata_values = []
-            thumbnail_url = false;
+            thumbnail_url = false
+            document_url = false
             @metadata.each do |id, field|
               if(field == 'classificacao')
                 item_metadata = {
@@ -57,16 +58,29 @@ class Submission < PollProcess
                   value: item[field] #logstash
                 }
               end
-              if( id != '_thumbnail' )
-                metadata_values.push(item_metadata)
-              else
+              if( id == '_thumbnail' )
                 thumbnail_url = item[field]
+              elsif( id == '_document' )
+                if( item[field]['type'] == 'attachment' )
+                  document_url = item[field]['value']
+                end
+              else
+                metadata_values.push(item_metadata)
               end
             end
             body = {
               collectionId: @collectionId,
-              metadata: metadata_values
+              metadata: metadata_values,
             }
+
+            if(document_url != false)
+              body['document'] = document_url
+              body['document_type'] = "url"
+              body['document_options'] = {
+                forced_iframe: true
+              }
+            end
+
             http = Net::HTTP.new(uri.host, uri.port)
             request = Net::HTTP::Post.new(uri.request_uri, header)
             request.body = body.to_json
