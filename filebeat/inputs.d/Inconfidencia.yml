@@ -42,6 +42,7 @@
           - {from: "json.data.midias-relacionadas.value",    to: "payload.midias-relacionadas"}
           - {from: "json.url",                               to: "payload.url"}
           - {from: "json.thumbnail",                         to: "payload.thumbnail"}
+          - {from: "json.document",                          to: "payload.document"}
       ignore_missing: true
       fail_on_error: false
   - drop_fields:

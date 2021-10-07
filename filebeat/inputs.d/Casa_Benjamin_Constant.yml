@@ -93,6 +93,10 @@
               from: "json.thumbnail",
               to: "payload.thumbnail"
             }
+          - {
+              from: "json.document",
+              to: "payload.document"
+            }
         ignore_missing: true
         fail_on_error: false
     - drop_fields:
