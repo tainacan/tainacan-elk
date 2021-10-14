@@ -86,8 +86,8 @@ services:
     image: docker.elastic.co/kibana/kibana:7.9.0
     ports: 
       - 6601:5601
-    volumes:
-      - ./kibana/config:/usr/share/kibana/config/
+    #volumes:
+    #  - ./kibana/config:/usr/share/kibana/config/
     depends_on: 
       - elasticsearch
 
