@@ -19,15 +19,20 @@ class Submission < PollProcess
     end
 
     def download_url_to(url, base_path)
-      uri = URI(url)
-      filename = uri.path.split("/").last
-      new_file = File.join(base_path, SecureRandom.uuid + '_integracao_files_' + filename )
+      begin
+        uri = URI(url)
+        filename = uri.path.split("/").last
+        new_file = File.join(base_path, SecureRandom.uuid + '_integracao_files_' + filename )
 
-      image = MiniMagick::Image.open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE)
-      image.resize "300x300"
-      image.write(new_file)
+        image = MiniMagick::Image.open(url, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE, :open_timeout => 3000, :read_timeout => 3000)
+        image.resize "300x300"
+        image.write(new_file)
 
-      return new_file
+        return new_file
+      rescue Exception => e
+        $log.error "GET DEFAULT IMAGE #{default_file}"
+        return false
+      end
     end
     
     def delete_file(path_to_file)
@@ -95,10 +100,10 @@ class Submission < PollProcess
                 if(thumbnail_url != false)
                   temp = Dir.tmpdir()
                   file_thumbnail_path = download_url_to(thumbnail_url, temp)
-                  file_thumbnail = File.open(file_thumbnail_path)
+                  file_thumbnail = file_thumbnail_path !== false ? File.open(file_thumbnail_path) : File.open(File.join(File.expand_path(File.dirname(__FILE__)), 'default_image.png'))
                   request.set_form([['thumbnail', file_thumbnail]], 'multipart/form-data')
                 end
-                response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+                response = Net::HTTP.start(uri.hostname, uri.port, :open_timeout => 3000, :read_timeout => 3000) do |http|
                   http.request(request)
                 end
                 delete_file(file_thumbnail_path)
