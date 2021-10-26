@@ -30,13 +30,15 @@ class Submission < PollProcess
 
         return new_file
       rescue Exception => e
-        $log.error "GET DEFAULT IMAGE #{default_file}"
+        $log.error "BAD DOWNLOAD URL"
         return false
       end
     end
     
     def delete_file(path_to_file)
-      File.delete(path_to_file) if File.exist?(path_to_file)
+      if path_to_file != false
+        File.delete(path_to_file) if File.exist?(path_to_file)
+      end
     end
 
     def submission(item)
@@ -82,7 +84,8 @@ class Submission < PollProcess
               body['document'] = document_url
               body['document_type'] = "url"
               body['document_options'] = {
-                forced_iframe: true
+                forced_iframe: true,
+                is_image: true
               }
             end
 
@@ -100,8 +103,10 @@ class Submission < PollProcess
                 if(thumbnail_url != false)
                   temp = Dir.tmpdir()
                   file_thumbnail_path = download_url_to(thumbnail_url, temp)
-                  file_thumbnail = file_thumbnail_path !== false ? File.open(file_thumbnail_path) : File.open(File.join(File.expand_path(File.dirname(__FILE__)), 'default_image.png'))
-                  request.set_form([['thumbnail', file_thumbnail]], 'multipart/form-data')
+                  if(file_thumbnail_path != false)
+                    file_thumbnail = File.open(file_thumbnail_path)
+                    request.set_form([['thumbnail', file_thumbnail]], 'multipart/form-data')
+                  end
                 end
                 response = Net::HTTP.start(uri.hostname, uri.port, :open_timeout => 3000, :read_timeout => 3000) do |http|
                   http.request(request)
