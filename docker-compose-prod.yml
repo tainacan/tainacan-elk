@@ -1,20 +1,20 @@
-version: '3.3'
+version: "3.3"
 services:
   tainacan:
     image: tainacan/tainacan
     container_name: integracao_tnc_tainacan
     ports:
-      - "6076:80"
+      - "80:80"
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: taincan_user
       WORDPRESS_DB_PASSWORD: jtr%6i
       WORDPRESS_DB_NAME: tainacan
     volumes:
-    - ./tainacan/html:/var/www/html/
-    - ./tainacan/html/wp-content/themes:/var/www/html/wp-content/themes/
-    - ./tainacan/html/wp-content/plugins:/var/www/html/wp-content/plugins/
-    - ./tainacan/html/wp-content/uploads:/var/www/html/wp-content/uploads/
+      - ./tainacan/html:/var/www/html/
+      - ./tainacan/html/wp-content/themes:/var/www/html/wp-content/themes/
+      - ./tainacan/html/wp-content/plugins:/var/www/html/wp-content/plugins/
+      - ./tainacan/html/wp-content/uploads:/var/www/html/wp-content/uploads/
 
   db:
     image: mysql:5.7
@@ -25,8 +25,8 @@ services:
       MYSQL_USER: taincan_user
       MYSQL_PASSWORD: jtr%6i
     volumes:
-    - ./dbdata:/var/lib/mysql
-    - ./init.d/mysql:/docker-entrypoint-initdb.d
+      - ./dbdata:/var/lib/mysql
+      - ./init.d/mysql:/docker-entrypoint-initdb.d
 
   elasticsearch:
     container_name: integracao_tnc_elasticsearch
@@ -43,7 +43,6 @@ services:
     volumes:
       - ./esdata:/usr/share/elasticsearch/data
 
-
   logstash:
     container_name: integracao_tnc_logstash
     # image: docker.elastic.co/logstash/logstash:7.9.0
@@ -51,7 +50,7 @@ services:
       context: .
       dockerfile: ./Dockerfile/logstash
     environment:
-       LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
     volumes:
       - ./logstash/data:/usr/share/logstash/data
       - ./logstash/pipeline:/usr/share/logstash/pipeline
@@ -77,18 +76,18 @@ services:
       - ./filebeat/inputs.d:/usr/share/filebeat/inputs.d
       - ./filebeat/fbdata:/usr/share/filebeat/data/
     restart: on-failure
-    depends_on: 
+    depends_on:
       - elasticsearch
       - logstash
- 
+
   kibana:
     container_name: integracao_tnc_kibana
     image: docker.elastic.co/kibana/kibana:7.9.0
-    ports: 
+    ports:
       - 6601:5601
     #volumes:
     #  - ./kibana/config:/usr/share/kibana/config/
-    depends_on: 
+    depends_on:
       - elasticsearch
 
 volumes:
@@ -96,5 +95,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/medialab/tainacan_docker/tainacan-integracao/logstash/logstash
+      device: /[PATH]/logstash/logstash
       o: bind
