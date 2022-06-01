@@ -1,7 +1,7 @@
 - type: httpjson
   http_method: GET
   interval: 3600s
-  url: https://museudaabolicao.acervos.museus.gov.br/wp-json/tainacan/v2/collection/7/items/?perpage=50&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
+  url: https://url.origem/wp-json/tainacan/v2/collection/...
   json_objects_array: "items"
   pagination:
     enabled: true
@@ -9,7 +9,7 @@
       perpage: 50
     id_field: pagination.next_page
     req_field: paged
-    url: https://museudaabolicao.acervos.museus.gov.br/wp-json/tainacan/v2/collection/7/items/?perpage=50&order=DESC&orderby=date&exposer=json-flat&mapper=inbcm-ibram&paged=1
+    url: https://url.origem/wp-json/tainacan/v2/collection/...
 
   processors:
     - decode_json_fields:
@@ -89,14 +89,8 @@
               to: "payload.midias-relacionadas",
             }
           - { from: "json.url", to: "payload.url" }
-          - { 
-              from: "json.thumbnail",
-              to: "payload.thumbnail"
-            }
-          - {
-              from: "json.document",
-              to: "payload.document"
-            }
+          - { from: "json.thumbnail", to: "payload.thumbnail" }
+          - { from: "json.document", to: "payload.document" }
         ignore_missing: true
         fail_on_error: false
     - drop_fields:
@@ -104,7 +98,7 @@
     - add_fields:
         target: payload
         fields:
-          museu: "Museu da Abolição"
-          colecao: "Acervo Museológico"
-          cidade: "Recife"
-          uf: "PE"
+          museu: "Museu de Origem"
+          colecao: "Acervo Teste"
+          cidade: "Cidade"
+          uf: "UF"
