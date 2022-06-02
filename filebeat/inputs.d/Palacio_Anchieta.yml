@@ -1,0 +1,80 @@
+- type: httpjson
+  http_method: GET
+  interval: 3600s
+  url: http://midiateca.es.gov.br/palacioanchieta/wp-json/tainacan/v2/collection/77/items/?perpage=96&order=ASC&orderby=date&exposer=json-flat&mapper=dublin-core&paged=1
+  json_objects_array: "items"
+  pagination:
+    enabled: true
+    extra_body_content:
+      perpage: 50
+    id_field: pagination.next_page
+    req_field: paged
+    url: http://midiateca.es.gov.br/palacioanchieta/wp-json/tainacan/v2/collection/77/items/?perpage=96&order=ASC&orderby=date&exposer=json-flat&mapper=dublin-core&paged=1
+
+  processors:
+    - decode_json_fields:
+        fields: [message]
+        target: json
+    - convert:
+        mode: "rename"
+        fields:
+          - { from: "json.id", to: "payload.id" }
+          - { from: "json.data.dc:contributor.value", to: "payload.contributor" }
+          - {
+              from: "json.data.dc:coverage.value",
+              to: "payload.coverage",
+            }
+          - {
+              from: "json.data.dc:creator.value",
+              to: "payload.creator",
+            }
+          - { from: "json.data.dc:date.value", to: "payload.date" }
+          - { from: "json.data.dc:description.value", to: "payload.description" }
+          - { from: "json.data.dc:format.value", to: "payload.format" }
+          - {
+              from: "json.data.dc:identifier.value",
+              to: "payload.identifier",
+            }
+          - {
+              from: "json.data.dc:language.value",
+              to: "payload.language",
+            }
+          - { from: "json.data.dc:publisher.value", to: "payload.publisher" }
+          - {
+              from: "json.data.dc:relation.value",
+              to: "payload.relation",
+            }
+          - {
+              from: "json.data.dc:rights.value",
+              to: "payload.rights",
+            }
+          - {
+              from: "json.data.dc:source.value",
+              to: "payload.source",
+            }
+          - {
+              from: "json.data.dc:subject.value",
+              to: "payload.subject",
+            }
+          - {
+              from: "json.data.dc:title.value",
+              to: "payload.title",
+            }
+          - {
+              from: "json.data.dc:type.value",
+              to: "payload.type",
+            }
+          - { from: "json.url", to: "payload.url" }
+          - { from: "json.thumbnail", to: "payload.thumbnail" }
+          - { from: "json.document", to: "payload.document" }
+        ignore_missing: true
+        fail_on_error: false
+    - drop_fields:
+        fields: ["message", "json"]
+    - add_fields:
+        target: payload
+        fields:
+          museu: "Palácio Anchieta"
+          colecao: "Acervo Digital do Palácio Anchieta"
+          cidade: "Vitória"
+          uf: "ES"
