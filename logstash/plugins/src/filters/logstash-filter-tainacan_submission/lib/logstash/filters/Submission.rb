@@ -30,7 +30,7 @@ class Submission < PollProcess
 
         return new_file
       rescue Exception => e
-        $log.error "BAD DOWNLOAD URL"
+        $log.error "BAD DOWNLOAD URL: #{url}"
         return false
       end
     end

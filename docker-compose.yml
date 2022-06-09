@@ -10,7 +10,7 @@ services:
       MARIADB_PASSWORD: "tainacan"
     volumes:
       - ./dbdata:/var/lib/mysql
-      - ./init.d/mysql:/docker-entrypoint-initdb.d.d
+      - ./init.d/mysql:/docker-entrypoint-initdb.d
   tainacan:
     image: tainacan/php:7.4-fpm-apache
     container_name: integracao_tainacan
@@ -108,7 +108,6 @@ services:
     depends_on:
       - elasticsearch
       - logstash
-
 #   kibana:
 #     container_name: integracao_tnc_kibana
 #     image: docker.elastic.co/kibana/kibana:7.9.0
