@@ -1,38 +1,67 @@
 version: "3.3"
 services:
+  database:
+    image: mariadb:10.5
+    container_name: integracao_mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "tainacan"
+      MARIADB_DATABASE: "tainacan"
+      MARIADB_USER: "tainacan"
+      MARIADB_PASSWORD: "tainacan"
+    volumes:
+      - ./dbdata:/var/lib/mysql
+      - ./init.d/mysql:/docker-entrypoint-initdb.d.d
   tainacan:
-    image: tainacan/tainacan
-    container_name: integracao_tnc_tainacan
+    image: tainacan/php:7.4-fpm-apache
+    container_name: integracao_tainacan
     ports:
       - "80:80"
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: taincan_user
-      WORDPRESS_DB_PASSWORD: jtr%6i
-      WORDPRESS_DB_NAME: tainacan
+      #site config:
+      SITE_LANGUAGE: en_US
+      SITE_URL: http://localhost
+      SITE_TITLE: Tainacan
+      SITE_ADMIN_USER: tainacan
+      SITE_ADMIN_EMAIL: tainacan@local.org
+      SITE_ADMIN_PASSWORD: tainacan
+      #wordpress config:
+      DBNAME: tainacan
+      DB_USER: tainacan
+      DB_PSWD: tainacan
+      DB_HOST: "integracao_mariadb:3306"
+      #APACHE,PHP,FPM config
+      PHP_POST_MAX_SIZE: "200M"
+      PHP_UPLOAD_MAX_FILE_SIZE: "200M"
+      PHP_MAX_EXECUTION_TIME: "300"
+      PHP_MEMORY_LIMIT: "512M"
+      PHP_POOL_NAME: "www"
+      PHP_DATE_TIMEZONE: "UTC"
+      PHP_DISPLAY_ERRORS: "On"
+      PHP_ERROR_REPORTING: "E_ALL & ~E_DEPRECATED & ~E_STRICT"
+      PHP_PM_CONTROL: ondemand
+      PHP_PM_MAX_CHILDREN: "20"
+      PHP_PM_START_SERVERS: "2"
+      PHP_PM_MIN_SPARE_SERVERS: "1"
+      PHP_PM_MAX_SPARE_SERVERS: "3"
+      MSMTP_RELAY_SERVER_HOSTNAME: "mailhog"
+      MSMTP_RELAY_SERVER_PORT: "1025"
+      APACHE_DOCUMENT_ROOT: "/var/www/html/public"
+      APACHE_START_SERVERS: "2"
+      APACHE_MIN_SPARE_THREADS: "10"
+      APACHE_MAX_SPARE_THREADS: "75"
+      APACHE_THREAD_LIMIT: "64"
+      APACHE_THREADS_PER_CHILD: "25"
+      APACHE_MAX_REQUEST_WORKERS: "150"
+      APACHE_MAX_CONNECTIONS_PER_CHILD: "0"
+      APACHE_RUN_USER: "webuser"
+      APACHE_RUN_GROUP: "webgroup"
     volumes:
       - ./tainacan/html:/var/www/html/
-      - ./tainacan/html/wp-content/themes:/var/www/html/wp-content/themes/
-      - ./tainacan/html/wp-content/plugins:/var/www/html/wp-content/plugins/
-      - ./tainacan/html/wp-content/uploads:/var/www/html/wp-content/uploads/
-
-  db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: Er$$8*uhy#
-      MYSQL_DATABASE: tainacan
-      MYSQL_USER: taincan_user
-      MYSQL_PASSWORD: jtr%6i
-    volumes:
-      - ./dbdata:/var/lib/mysql
-      - ./init.d/mysql:/docker-entrypoint-initdb.d
-
+    depends_on:
+      - database
   elasticsearch:
     container_name: integracao_tnc_elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    ports:
-      - "9200:9200"
     environment:
       - discovery.type=single-node
       - cluster.routing.allocation.disk.watermark.flood_stage=99%
@@ -41,10 +70,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2144M
+          memory: 6144M
     volumes:
       - ./esdata:/usr/share/elasticsearch/data
-
   logstash:
     container_name: integracao_tnc_logstash
     # image: docker.elastic.co/logstash/logstash:7.9.0
@@ -53,7 +81,6 @@ services:
       dockerfile: ./Dockerfile/logstash
     environment:
       LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
-      LS_OPTS: "--config.reload.automatic --config.reload.interval 5s"
     volumes:
       - ./logstash/data:/usr/share/logstash/data
       - ./logstash/pipeline:/usr/share/logstash/pipeline
@@ -66,7 +93,6 @@ services:
           nocopy: false
     depends_on:
       - elasticsearch
-
   filebeat:
     container_name: integracao_tnc_filebeat
     hostname: filebeat
@@ -80,23 +106,23 @@ services:
       - ./filebeat/fbdata:/usr/share/filebeat/data/
     restart: on-failure
     depends_on:
+      - elasticsearch
       - logstash
-      - elasticsearch
 
-  kibana:
-    container_name: integracao_tnc_kibana
-    image: docker.elastic.co/kibana/kibana:7.9.0
-    ports:
-      - 5601:5601
-    volumes:
-      - ./kibana/config:/usr/share/kibana/config/
-    depends_on:
-      - elasticsearch
+#   kibana:
+#     container_name: integracao_tnc_kibana
+#     image: docker.elastic.co/kibana/kibana:7.9.0
+#     ports:
+#       - 6601:5601
+#     #volumes:
+#     #  - ./kibana/config:/usr/share/kibana/config/
+#     depends_on:
+#       - elasticsearch
 
 volumes:
   share_logstash:
     driver: local
     driver_opts:
       type: none
-      device: [<LOCAL PATH>]/logstash/logstash
+      device: /home/vinicius/Development/tainacan/tainacan-elk/logstash/logstash
       o: bind
