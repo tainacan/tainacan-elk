@@ -66,7 +66,6 @@ services:
       - discovery.type=single-node
       - cluster.routing.allocation.disk.watermark.flood_stage=99%
       - cluster.routing.allocation.disk.watermark.high=98%
-      # - xpack.security.enabled=true
     deploy:
       resources:
         limits:
@@ -75,22 +74,16 @@ services:
       - ./esdata:/usr/share/elasticsearch/data
   logstash:
     container_name: integracao_tnc_logstash
-    # image: docker.elastic.co/logstash/logstash:7.9.0
     build:
       context: .
-      dockerfile: ./Dockerfile/logstash
+      dockerfile: ./logstash/Dockerfile
     environment:
       LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
     volumes:
       - ./logstash/data:/usr/share/logstash/data
       - ./logstash/pipeline:/usr/share/logstash/pipeline
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-      - ./logstash/plugins:/plugins
-      - type: volume
-        source: share_logstash
-        target: /usr/share/logstash
-        volume:
-          nocopy: false
+      - ./logstash/writeLog.log:/usr/share/logstash/writeLog.log
     depends_on:
       - elasticsearch
   filebeat:
@@ -108,20 +101,12 @@ services:
     depends_on:
       - elasticsearch
       - logstash
-#   kibana:
-#     container_name: integracao_tnc_kibana
-#     image: docker.elastic.co/kibana/kibana:7.9.0
-#     ports:
-#       - 6601:5601
-#     #volumes:
-#     #  - ./kibana/config:/usr/share/kibana/config/
-#     depends_on:
-#       - elasticsearch
-
-volumes:
-  share_logstash:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/vinicius/Development/tainacan/tainacan-elk/logstash/logstash
-      o: bind
+  # kibana:
+  #   container_name: integracao_tnc_kibana
+  #   image: docker.elastic.co/kibana/kibana:7.9.0
+  #   ports:
+  #     - 6601:5601
+  #   #volumes:
+  #   #  - ./kibana/config:/usr/share/kibana/config/
+  #   depends_on:
+  #     - elasticsearch
