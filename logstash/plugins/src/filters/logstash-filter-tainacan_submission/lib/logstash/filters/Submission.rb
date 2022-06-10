@@ -30,7 +30,11 @@ class Submission < PollProcess
 
         return new_file
       rescue Exception => e
+        $log.error ">>>---------------------------------------------------------------"
         $log.error "BAD DOWNLOAD URL: #{url}"
+        $log.error "metada received by logstash: #{@metadata}"
+        $log.error "item received by logstash: #{@item}"
+        $log.error "---------------------------------------------------------------<<<"
         return false
       end
     end
@@ -133,9 +137,12 @@ class Submission < PollProcess
           end
         end
       rescue Exception => e
+        @error = "#{e}"
+        $log.error ">>>---------------------------------------------------------------"
         $log.error "Houve um erro!: #{e}"
         $log.error "metada received by logstash: #{@metadata}"
         $log.error "item received by logstash: #{@item}"
+        $log.error "---------------------------------------------------------------<<<"
         return
       end
     end
