@@ -3,6 +3,7 @@ services:
   database:
     image: mariadb:10.5
     container_name: integracao_mariadb
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "tainacan"
       MARIADB_DATABASE: "tainacan"
@@ -14,6 +15,7 @@ services:
   tainacan:
     image: tainacan/php:7.4-fpm-apache
     container_name: integracao_tainacan
+    restart: always
     ports:
       - "80:80"
     environment:
