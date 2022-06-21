@@ -1,16 +1,20 @@
 - type: httpjson
-  http_method: GET
+  config_version: 2
   interval: 345600s
-  url: http://midiateca.es.gov.br/arquivopublico/wp-json/tainacan/v2/collection/4907/items/?perpage=50&order=ASC&orderby=date&exposer=json-flat&mapper=dublin-core&paged=1
-  json_objects_array: "items"
-  pagination:
-    enabled: true
-    extra_body_content:
-      perpage: 50
-    id_field: pagination.next_page
-    req_field: paged
-    url: http://midiateca.es.gov.br/arquivopublico/wp-json/tainacan/v2/collection/4907/items/?perpage=50&order=ASC&orderby=date&exposer=json-flat&mapper=dublin-core&paged=1
-
+  request.method: GET
+  request.url: http://midiateca.es.gov.br/arquivopublico/wp-json/tainacan/v2/collection/4907/items/?perpage=50&order=ASC&orderby=date&exposer=json-flat&mapper=dublin-core&paged=1
+  response.split:
+    target: body.items
+  response.pagination:
+    - set:
+        target: url.value
+        value: http://midiateca.es.gov.br/arquivopublico/wp-json/tainacan/v2/collection/4907/items/?perpage=50&order=ASC&orderby=date&exposer=json-flat&mapper=dublin-core
+    - set:
+        target: url.params.paged
+        value: "[[.last_response.body.pagination.next_page]]"
+    - set:
+        target: body.perpage
+        value: 50
   processors:
     - decode_json_fields:
         fields: [message]
