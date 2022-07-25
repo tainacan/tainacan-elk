@@ -1,0 +1,48 @@
+- type: httpjson
+  http_method: GET
+  interval: 3600s
+  url: https://repositorio.ci.cultura.gob.mx/wp-json/tainacan/v2/collection/19207/items/?perpage=96&order=ASC&orderby=date&paged=1
+  json_objects_array: "items"
+  pagination:
+    enabled: true
+    extra_body_content:
+      perpage: 50
+    id_field: pagination.next_page
+    req_field: paged
+    url: https://repositorio.ci.cultura.gob.mx/wp-json/tainacan/v2/collection/19207/items/?perpage=96&order=ASC&orderby=date&paged=1
+
+  processors:
+    - decode_json_fields:
+        fields: [message]
+        target: json
+    - convert:
+        mode: "rename"
+        fields:
+          - { from: "json.id", to: "payload.id" }
+          - { from: "json.data.title.value", to: "payload.titulo" }
+          - {
+              from: "json.data.description.value",
+              to: "payload.descripcion",
+            }
+          - {
+              from: "json.data.url",
+              to: "payload.url",
+            }
+          - {
+              from: "json.data.curaduria",
+              to: "payload.curaduria",
+            }
+          - { from: "json.url", to: "payload.url" }
+          - { from: "json.thumbnail", to: "payload.thumbnail" }
+          - { from: "json.document", to: "payload.document" }
+        ignore_missing: true
+        fail_on_error: false
+    - drop_fields:
+        fields: ["message", "json"]
+    - add_fields:
+        target: payload
+        fields:
+          museu: "Centro de la Imagen Museo"
+          colecao: "Acervo Mariana Yampolsky"
+          cidade: "CDMX"
+          uf: "MX"
