@@ -68,6 +68,8 @@ services:
       - discovery.type=single-node
       - cluster.routing.allocation.disk.watermark.flood_stage=99%
       - cluster.routing.allocation.disk.watermark.high=98%
+    #ports:
+      #- "9200:9200" 
     deploy:
       resources:
         limits:
@@ -109,6 +111,6 @@ services:
     ports:
       - 6601:5601
     #volumes:
-    #  - ./kibana/config:/usr/share/kibana/config/
+      #- ./kibana/config:/usr/share/kibana/config/
     depends_on:
       - elasticsearch
