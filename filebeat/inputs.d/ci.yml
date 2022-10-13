@@ -1,16 +1,20 @@
 - type: httpjson
-  http_method: GET
-  interval: 3600s
-  url: https://repositorio.ci.cultura.gob.mx/wp-json/tainacan/v2/collection/19207/items/?perpage=96&order=ASC&orderby=date&paged=1
-  json_objects_array: "items"
-  pagination:
-    enabled: true
-    extra_body_content:
-      perpage: 50
-    id_field: pagination.next_page
-    req_field: paged
-    url: https://repositorio.ci.cultura.gob.mx/wp-json/tainacan/v2/collection/19207/items/?perpage=96&order=ASC&orderby=date&paged=1
-
+  config_version: 2
+  interval: 345600s
+  request.method: GET
+  request.url: https://repositorio.ci.cultura.gob.mx/wp-json/tainacan/v2/collection/19207/items/?perpage=96&order=ASC&orderby=date&paged=1&exposer=json-flat
+  response.split:
+    target: body.items
+  response.pagination:
+    - set:
+        target: url.value
+        value: https://repositorio.ci.cultura.gob.mx/wp-json/tainacan/v2/collection/19207/items/?perpage=96&order=ASC&orderby=date&paged=1&exposer=json-flat
+    - set:
+        target: url.params.paged
+        value: "[[.last_response.body.pagination.next_page]]"
+    - set:
+        target: body.perpage
+        value: 50
   processors:
     - decode_json_fields:
         fields: [message]
@@ -19,19 +23,9 @@
         mode: "rename"
         fields:
           - { from: "json.id", to: "payload.id" }
-          - { from: "json.data.title.value", to: "payload.titulo" }
-          - {
-              from: "json.data.description.value",
-              to: "payload.descripcion",
-            }
-          - {
-              from: "json.data.url",
-              to: "payload.url",
-            }
-          - {
-              from: "json.data.curaduria",
-              to: "payload.curaduria",
-            }
+          - { from: "json.data.titulo-6.value", to: "payload.titulo" }
+          - { from: "json.data.descripcion-6.value", to: "payload.descripcion" }
+          - { from: "json.data.curaduria.value", to: "payload.curaduria" }
           - { from: "json.url", to: "payload.url" }
           - { from: "json.thumbnail", to: "payload.thumbnail" }
           - { from: "json.document", to: "payload.document" }
