@@ -68,8 +68,8 @@ services:
       - discovery.type=single-node
       - cluster.routing.allocation.disk.watermark.flood_stage=99%
       - cluster.routing.allocation.disk.watermark.high=98%
-    #ports:
-      #- "9200:9200" 
+    ports:
+      - "9200:9200" 
     deploy:
       resources:
         limits:
@@ -105,12 +105,12 @@ services:
     depends_on:
       - elasticsearch
       - logstash
-  kibana:
-    container_name: integracao_tnc_kibana
-    image: docker.elastic.co/kibana/kibana:7.9.0
-    ports:
-      - 6601:5601
-    #volumes:
-      #- ./kibana/config:/usr/share/kibana/config/
-    depends_on:
-      - elasticsearch
+  # kibana:
+  #   container_name: integracao_tnc_kibana
+  #   image: docker.elastic.co/kibana/kibana:7.9.0
+  #   ports:
+  #     - 6601:5601
+  #   #volumes:
+  #     #- ./kibana/config:/usr/share/kibana/config/
+  #   depends_on:
+  #     - elasticsearch
